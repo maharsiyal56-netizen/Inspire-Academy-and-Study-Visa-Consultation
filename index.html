@@ -11,117 +11,508 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://via.placeholder.com/32/0a2b5e/ffd966?text=IA">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* === GLOBAL STYLE (same for all pages) === */
-    :root { --navy: #0a2b5e; --gold: #e4b23e; }
-    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background: #fcfcfc; }
-    .bg-navy { background-color: var(--navy); }
+    /* === GLOBAL STYLES === */
+    :root { 
+      --navy: #0a2b5e; 
+      --gold: #e4b23e;
+      --navy-light: #1e3a6b;
+      --gold-light: #f0c45a;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background-color: var(--navy) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      padding: 1rem 0;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .nav-link {
+      color: rgba(255,255,255,0.9) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: var(--gold) !important;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 70%;
+    }
+    
+    .nav-link.active {
+      color: var(--gold) !important;
+      font-weight: 600;
+    }
+    
+    /* Buttons */
+    .btn-gold { 
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy); 
+      font-weight: 600; 
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(228, 178, 62, 0.3);
+    }
+    
+    .btn-gold:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(228, 178, 62, 0.4);
+      color: var(--navy);
+    }
+    
+    .btn-outline-gold {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+    
+    /* Section Title */
+    .section-title { 
+      border-left: 6px solid var(--gold); 
+      padding-left: 1.5rem; 
+      margin-bottom: 3rem; 
+      font-weight: 700; 
+      color: var(--navy);
+      font-size: 2.5rem;
+      position: relative;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+    }
+    
+    /* Cards */
+    .card-hover { 
+      transition: all 0.3s ease; 
+      border: none; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    
+    .card-hover:hover { 
+      transform: translateY(-10px); 
+      box-shadow: 0 20px 40px rgba(10,43,94,0.15);
+    }
+    
+    /* Hero Sections */
+    .hero-bg { 
+      background: linear-gradient(135deg, rgba(10,43,94,0.95) 0%, rgba(30,58,107,0.9) 100%), 
+      url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover; 
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .page-hero { 
+      background: linear-gradient(135deg, rgba(10,43,94,0.95) 0%, rgba(30,58,107,0.9) 100%), 
+      url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover; 
+      padding: 6rem 0;
+    }
+    
+    /* Footer */
+    .footer { 
+      background: linear-gradient(135deg, #041c33 0%, #0a2b5e 100%);
+      color: rgba(255,255,255,0.8);
+      position: relative;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    
+    .footer a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer a:hover {
+      color: var(--gold);
+    }
+    
+    /* Backgrounds */
+    .bg-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); }
+    .bg-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); }
     .text-gold { color: var(--gold); }
-    .btn-gold { background-color: var(--gold); color: #0a2b5e; font-weight: 600; border: none; }
-    .btn-gold:hover { background-color: #c99c2f; color: #000; }
-    .section-title { border-left: 6px solid var(--gold); padding-left: 1rem; margin-bottom: 2rem; font-weight: 700; color: var(--navy); }
-    .card-hover { transition: transform 0.2s; border: none; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.05); }
-    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 0.5rem 1.5rem rgba(10,43,94,0.15); }
-    .hero-bg { background: linear-gradient(rgba(10,43,94,0.85), rgba(10,43,94,0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover fixed; }
-    .page-hero { background: linear-gradient(rgba(10,43,94,0.85), rgba(10,43,94,0.9)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover; padding: 4rem 0; }
-    .footer { background-color: #041c33; color: #ddd; }
-    .navbar { background-color: var(--navy) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-    .nav-link { color: rgba(255,255,255,0.85) !important; font-weight: 500; }
-    .nav-link:hover { color: var(--gold) !important; }
+    
+    /* Teacher Cards */
+    .teacher-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .teacher-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .teacher-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .teacher-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10,43,94,0.95), transparent);
+      color: white;
+      padding: 2rem 1.5rem 1.5rem;
+      transform: translateY(100px);
+      transition: transform 0.3s ease;
+    }
+    
+    .teacher-card:hover .teacher-overlay {
+      transform: translateY(0);
+    }
+    
+    /* Form Styles */
+    .form-control, .form-select {
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(228, 178, 62, 0.25);
+    }
   </style>
 </head>
 <body>
-  <!-- STICKY NAVBAR (same across pages) -->
+  <!-- NAVIGATION -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-mortarboard-fill me-2 text-gold"></i>Inspire Academy</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-mortarboard-fill me-2 text-gold"></i>Inspire Academy
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="admission.html">Admissions</a></li>
           <li class="nav-item"><a class="nav-link" href="cadet.html">Cadet Colleges</a></li>
           <li class="nav-item"><a class="nav-link" href="visa.html">Study Visa</a></li>
           <li class="nav-item"><a class="nav-link" href="teachers.html">Teachers</a></li>
-          <li class="nav-item"><a class="btn btn-gold btn-sm ms-2" href="#" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</a></li>
+          <li class="nav-item ms-3">
+            <a class="btn btn-gold" href="#" data-bs-toggle="modal" data-bs-target="#applyModal">
+              <i class="bi bi-pencil-square me-2"></i>Apply Now
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- QUICK APPLY MODAL (global) -->
-  <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content"><div class="modal-header bg-navy text-white"><h5 class="modal-title">Quick Apply</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><form><div class="mb-3"><input type="text" class="form-control" placeholder="Full name"></div><div class="mb-3"><input type="text" class="form-control" placeholder="Class (9th/10th/FSc)"></div><div class="mb-3"><input type="email" class="form-control" placeholder="Email"></div><div class="mb-3"><input type="tel" class="form-control" placeholder="Phone"></div><div class="mb-3"><textarea class="form-control" rows="2" placeholder="Message"></textarea></div><button type="submit" class="btn btn-gold w-100">Submit</button></form></div></div></div>
+  <!-- QUICK APPLY MODAL -->
+  <div class="modal fade" id="applyModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0">
+        <div class="modal-header bg-navy text-white border-0">
+          <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Quick Application</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Full Name</label>
+              <input type="text" class="form-control" placeholder="Enter your full name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Program Interest</label>
+              <select class="form-select">
+                <option>9th Class</option>
+                <option>10th Class</option>
+                <option>FSc Pre-Medical</option>
+                <option>FSc Pre-Engineering</option>
+                <option>Cadet College Prep</option>
+                <option>Study Visa</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" placeholder="your@email.com">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Phone</label>
+                <input type="tel" class="form-control" placeholder="03xx-xxxxxxx">
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Message (Optional)</label>
+              <textarea class="form-control" rows="2" placeholder="Any specific requirements?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold w-100 py-3">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- HERO SECTION (HOME) -->
-  <section class="hero-bg text-white py-5">
-    <div class="container py-5">
-      <div class="row py-4" data-aos="fade-up">
+  <!-- HERO SECTION -->
+  <section class="hero-bg text-white">
+    <div class="container">
+      <div class="row py-5" data-aos="fade-up">
         <div class="col-lg-8">
-          <h1 class="display-4 fw-bold">Shape Your Future <br><span class="text-gold">with Inspire Academy</span></h1>
-          <p class="lead fs-3">9th, 10th, FSc · Cadet College Prep · Study Visa</p>
-          <p class="fs-5">Guided by <strong>Sir Shafqat Abbas (Ex Army MA Med)</strong> & <strong>Sir Ghulam Akbar (MSc Zoology, Pharmacist)</strong></p>
-          <a href="#highlights" class="btn btn-gold btn-lg mt-3">Explore Programs</a>
+          <span class="badge bg-gold text-navy px-3 py-2 mb-4">Since 2015</span>
+          <h1 class="display-3 fw-bold mb-4">Shape Your Future<br><span class="text-gold">with Inspire Academy</span></h1>
+          <p class="lead fs-3 mb-3">9th, 10th, FSc · Cadet College Prep · Study Visa</p>
+          <p class="fs-5 mb-4 opacity-75">Guided by <strong>Sir Shafqat Abbas (Ex Army MA Med)</strong> & <strong>Sir Ghulam Akbar (MSc Zoology, Pharmacist)</strong></p>
+          <div class="d-flex gap-3">
+            <a href="#highlights" class="btn btn-gold btn-lg"><i class="bi bi-play-circle me-2"></i>Explore Programs</a>
+            <a href="#" class="btn btn-outline-gold btn-lg" data-bs-toggle="modal" data-bs-target="#applyModal">Get Started</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HIGHLIGHTS / ABOUT -->
+  <!-- HIGHLIGHTS SECTION -->
   <section class="py-5" id="highlights">
-    <div class="container">
-      <h2 class="section-title" data-aos="fade-right">Why Inspire Academy?</h2>
-      <p class="lead mb-5">We combine academic excellence with disciplined mentorship — your gateway to top grades and global education.</p>
-      <div class="row g-4">
-        <div class="col-md-4" data-aos="zoom-in"><div class="card card-hover h-100 p-3"><i class="bi bi-book fs-1 text-gold"></i><h5 class="mt-3">9th & 10th Classes</h5><p>Complete board preparation with weekly tests.</p></div></div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="50"><div class="card card-hover h-100 p-3"><i class="bi bi-flask fs-1 text-gold"></i><h5 class="mt-3">FSc (Pre-Medical/Eng)</h5><p>Conceptual teaching by experienced faculty.</p></div></div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100"><div class="card card-hover h-100 p-3"><i class="bi bi-shield-shaded fs-1 text-gold"></i><h5 class="mt-3">Cadet College Entry</h5><p>MCM, MCJ, PAF Kohat – written & physical.</p></div></div>
-        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="150"><div class="card card-hover h-100 p-3"><i class="bi bi-passport fs-1 text-gold"></i><h5 class="mt-3">Study Visa Consultation</h5><p>UK, Canada, Australia, Turkey – expert guidance.</p></div></div>
-        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="200"><div class="card card-hover h-100 p-3"><i class="bi bi-trophy fs-1 text-gold"></i><h5 class="mt-3">Why Choose Us</h5><p>Ex-Army mentor, Qualified Pharmacist, 95% success.</p></div></div>
+    <div class="container py-5">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="section-title mb-4">Why Inspire Academy?</h2>
+          <p class="lead mb-4">We combine academic excellence with disciplined mentorship — your gateway to top grades and global education.</p>
+          <div class="d-flex align-items-center gap-4">
+            <div class="text-center">
+              <h3 class="text-gold fw-bold mb-0">95%</h3>
+              <small>Success Rate</small>
+            </div>
+            <div class="text-center">
+              <h3 class="text-gold fw-bold mb-0">1000+</h3>
+              <small>Students</small>
+            </div>
+            <div class="text-center">
+              <h3 class="text-gold fw-bold mb-0">20+</h3>
+              <small>Years Experience</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students" class="img-fluid rounded-4 shadow-lg">
+        </div>
+      </div>
+
+      <div class="row g-4 mt-5">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="card card-hover h-100 p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mb-4" style="width: 70px; height: 70px;">
+              <i class="bi bi-book fs-1 text-navy mx-auto"></i>
+            </div>
+            <h4 class="fw-bold mb-3">9th & 10th Classes</h4>
+            <p class="text-secondary">Complete board preparation with weekly tests, past papers practice, and conceptual learning.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card card-hover h-100 p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mb-4" style="width: 70px; height: 70px;">
+              <i class="bi bi-flask fs-1 text-navy mx-auto"></i>
+            </div>
+            <h4 class="fw-bold mb-3">FSc (Pre-Medical/Eng)</h4>
+            <p class="text-secondary">Conceptual teaching by experienced faculty with regular lab sessions and entry test prep.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card card-hover h-100 p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mb-4" style="width: 70px; height: 70px;">
+              <i class="bi bi-shield-shaded fs-1 text-navy mx-auto"></i>
+            </div>
+            <h4 class="fw-bold mb-3">Cadet College Entry</h4>
+            <p class="text-secondary">MCM, MCJ, PAF Kohat – complete written test, interview, and physical preparation.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card card-hover h-100 p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mb-4" style="width: 70px; height: 70px;">
+              <i class="bi bi-passport fs-1 text-navy mx-auto"></i>
+            </div>
+            <h4 class="fw-bold mb-3">Study Visa Consultation</h4>
+            <p class="text-secondary">UK, Canada, Australia, Turkey – expert guidance for university admissions and visa process.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card card-hover h-100 p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mb-4" style="width: 70px; height: 70px;">
+              <i class="bi bi-trophy fs-1 text-navy mx-auto"></i>
+            </div>
+            <h4 class="fw-bold mb-3">Why Choose Us</h4>
+            <p class="text-secondary">Ex-Army mentor, Qualified Pharmacist, proven track record of success in academics and admissions.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TEACHER PREVIEW (linked to teachers.html) -->
+  <!-- TEACHER PREVIEW -->
   <section class="py-5 bg-light">
-    <div class="container">
+    <div class="container py-5">
       <h2 class="section-title" data-aos="fade-right">Meet Your Mentors</h2>
       <div class="row g-4">
-        <div class="col-md-6" data-aos="fade-up"><div class="card card-hover"><img src="https://via.placeholder.com/600x400/0a2b5e/ffffff?text=Sir+Shafqat+Abbas" class="card-img-top" alt="Sir Shafqat"><div class="card-body"><h5>Sir Shafqat Abbas <span class="badge bg-gold text-navy">Ex Army MA Med</span></h5><p>Discipline & leadership mentor, 20+ years.</p><a href="teachers.html" class="btn btn-outline-primary btn-sm">View profile</a></div></div></div>
-        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="card card-hover"><img src="https://via.placeholder.com/600x400/0a2b5e/ffffff?text=Sir+Ghulam+Akbar" class="card-img-top" alt="Sir Ghulam"><div class="card-body"><h5>Sir Ghulam Akbar <span class="badge bg-gold text-navy">MSc Zoology, Pharmacist</span></h5><p>Biology & Chemistry expert.</p><a href="teachers.html" class="btn btn-outline-primary btn-sm">View profile</a></div></div></div>
+        <div class="col-md-6" data-aos="fade-up">
+          <div class="teacher-card card-hover">
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sir Shafqat Abbas" class="img-fluid">
+            <div class="teacher-overlay">
+              <h4 class="fw-bold mb-1">Sir Shafqat Abbas</h4>
+              <p class="text-gold mb-2">Ex Army MA Med</p>
+              <p class="small opacity-75 mb-3">Discipline & leadership mentor with 22+ years experience</p>
+              <a href="teachers.html" class="btn btn-sm btn-gold">View Profile</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="teacher-card card-hover">
+            <img src="https://images.unsplash.com/photo-1531427186629-7fd5f3e6ad17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sir Ghulam Akbar" class="img-fluid">
+            <div class="teacher-overlay">
+              <h4 class="fw-bold mb-1">Sir Ghulam Akbar</h4>
+              <p class="text-gold mb-2">MSc Zoology, Pharmacist</p>
+              <p class="small opacity-75 mb-3">Gold medalist, 15+ years teaching FSc & entry tests</p>
+              <a href="teachers.html" class="btn btn-sm btn-gold">View Profile</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CALL TO ACTION -->
+  <!-- CTA SECTION -->
   <section class="py-5 bg-navy text-white text-center">
-    <div class="container">
-      <h3 class="mb-3">Ready to start your journey?</h3>
-      <a href="#" class="btn btn-gold btn-lg" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</a>
+    <div class="container py-4">
+      <h3 class="display-6 fw-bold mb-4">Ready to start your journey?</h3>
+      <p class="lead mb-4">Join Inspire Academy today and shape your future with expert guidance</p>
+      <a href="#" class="btn btn-gold btn-lg px-5" data-bs-toggle="modal" data-bs-target="#applyModal">
+        <i class="bi bi-arrow-right-circle me-2"></i>Apply Now
+      </a>
     </div>
   </section>
 
-  <!-- FOOTER (global) -->
+  <!-- FOOTER -->
   <footer class="footer pt-5 pb-4">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4"><h5 class="text-gold"><i class="bi bi-mortarboard-fill"></i> Inspire Academy</h5><p>Quality education & visa consultation since 2015. Sir Shafqat Abbas & Sir Ghulam Akbar</p></div>
-        <div class="col-md-4 mb-4"><h5 class="text-gold">Quick links</h5><ul class="list-unstyled"><li><a href="index.html" class="text-white-50">Home</a></li><li><a href="admission.html" class="text-white-50">Admissions</a></li><li><a href="cadet.html" class="text-white-50">Cadet Colleges</a></li><li><a href="visa.html" class="text-white-50">Study Visa</a></li><li><a href="teachers.html" class="text-white-50">Teachers</a></li></ul></div>
-        <div class="col-md-4 mb-4"><h5 class="text-gold">Contact</h5><p><i class="bi bi-geo-alt"></i> 123 Main Blvd, Lahore<br><i class="bi bi-telephone"></i> +92 300 1234567<br><i class="bi bi-envelope"></i> info@inspireacademy.pk</p><div class="fs-4"><a href="#" class="text-gold me-2"><i class="bi bi-facebook"></i></a><a href="#" class="text-gold me-2"><i class="bi bi-twitter"></i></a><a href="#" class="text-gold me-2"><i class="bi bi-instagram"></i></a></div></div>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h4 class="text-gold mb-4"><i class="bi bi-mortarboard-fill me-2"></i> Inspire Academy</h4>
+          <p class="mb-4">Quality education & visa consultation since 2015. Committed to excellence in academics and global opportunities.</p>
+          <div class="social-links">
+            <a href="#" class="me-3"><i class="bi bi-facebook fs-4"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-twitter fs-4"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-instagram fs-4"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-linkedin fs-4"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="text-gold mb-4">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html"><i class="bi bi-chevron-right me-2 small"></i>Home</a></li>
+            <li class="mb-2"><a href="admission.html"><i class="bi bi-chevron-right me-2 small"></i>Admissions</a></li>
+            <li class="mb-2"><a href="cadet.html"><i class="bi bi-chevron-right me-2 small"></i>Cadet Colleges</a></li>
+            <li class="mb-2"><a href="visa.html"><i class="bi bi-chevron-right me-2 small"></i>Study Visa</a></li>
+            <li class="mb-2"><a href="teachers.html"><i class="bi bi-chevron-right me-2 small"></i>Teachers</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <h5 class="text-gold mb-4">Programs</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-book me-2"></i>9th Class</li>
+            <li class="mb-2"><i class="bi bi-book me-2"></i>10th Class</li>
+            <li class="mb-2"><i class="bi bi-flask me-2"></i>FSc Pre-Medical</li>
+            <li class="mb-2"><i class="bi bi-calculator me-2"></i>FSc Pre-Engineering</li>
+            <li class="mb-2"><i class="bi bi-shield me-2"></i>Cadet College Prep</li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <h5 class="text-gold mb-4">Contact Info</h5>
+          <ul class="list-unstyled">
+            <li class="mb-3"><i class="bi bi-geo-alt-fill me-2 text-gold"></i> 123 Main Boulevard, Lahore</li>
+            <li class="mb-3"><i class="bi bi-telephone-fill me-2 text-gold"></i> +92 300 1234567</li>
+            <li class="mb-3"><i class="bi bi-envelope-fill me-2 text-gold"></i> info@inspireacademy.pk</li>
+            <li class="mb-3"><i class="bi bi-clock-fill me-2 text-gold"></i> Mon-Fri: 9am - 6pm</li>
+          </ul>
+        </div>
       </div>
-      <hr class="border-secondary"><p class="text-center mb-0">© 2025 Inspire Academy & Study Visa Consultation</p>
+      <hr class="border-secondary mt-4">
+      <p class="text-center mb-0 small opacity-75">© 2025 Inspire Academy & Study Visa Consultation. All rights reserved.</p>
     </div>
   </footer>
 
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 800, once: true });</script>
+  <script>
+    AOS.init({ 
+      duration: 1000, 
+      once: true,
+      offset: 100
+    });
+  </script>
 </body>
 </html>
 
@@ -133,110 +524,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admissions | Inspire Academy</title>
+  <title>Admissions 2025 | Inspire Academy</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://via.placeholder.com/32/0a2b5e/ffd966?text=IA">
-  <style> /* same global style as index, copy from above (keep concise) */ :root { --navy: #0a2b5e; --gold: #e4b23e; } body { font-family: 'Inter', sans-serif; background: #fcfcfc; } .bg-navy { background-color: var(--navy); } .text-gold { color: var(--gold); } .btn-gold { background-color: var(--gold); color: #0a2b5e; font-weight: 600; } .btn-gold:hover { background-color: #c99c2f; } .section-title { border-left: 6px solid var(--gold); padding-left: 1rem; margin-bottom: 2rem; font-weight: 700; color: var(--navy); } .card-hover { transition: transform 0.2s; } .card-hover:hover { transform: translateY(-5px); } .page-hero { background: linear-gradient(rgba(10,43,94,0.85), rgba(10,43,94,0.9)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover; padding: 4rem 0; } .footer { background-color: #041c33; } .navbar { background-color: var(--navy) !important; } </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>/* Copy all global styles from index.html */</style>
 </head>
 <body>
-  <!-- same navbar as index (update active) -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">... (same) ...</nav>
-  <div class="modal fade" id="applyModal">...</div>
-
-  <section class="page-hero text-white"><div class="container text-center"><h1 class="display-4">Admissions Open</h1><p class="lead">9th · 10th · FSc (Pre-Medical / Pre-Engineering)</p></div></section>
-
-  <section class="py-5">
+  <!-- Navigation (copy from index.html with active class updated) -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-      <h2 class="section-title" data-aos="fade-right">Fee Structure</h2>
-      <div class="row g-4 mb-5">
-        <div class="col-md-4"><div class="card card-hover p-4 text-center"><h3 class="text-gold">9th</h3><p class="fw-bold">Rs. 25,000/semester</p><p>Includes notes & test series</p></div></div>
-        <div class="col-md-4"><div class="card card-hover p-4 text-center"><h3 class="text-gold">10th</h3><p class="fw-bold">Rs. 26,000/semester</p><p>Board pattern practicals</p></div></div>
-        <div class="col-md-4"><div class="card card-hover p-4 text-center"><h3 class="text-gold">FSc</h3><p class="fw-bold">Rs. 30,000/semester</p><p>Pre-Medical / Pre-Engineering</p></div></div>
+      <a class="navbar-brand" href="index.html"><i class="bi bi-mortarboard-fill me-2 text-gold"></i>Inspire Academy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="admission.html">Admissions</a></li>
+          <li class="nav-item"><a class="nav-link" href="cadet.html">Cadet Colleges</a></li>
+          <li class="nav-item"><a class="nav-link" href="visa.html">Study Visa</a></li>
+          <li class="nav-item"><a class="nav-link" href="teachers.html">Teachers</a></li>
+          <li class="nav-item ms-3"><a class="btn btn-gold" href="#" data-bs-toggle="modal" data-bs-target="#applyModal"><i class="bi bi-pencil-square me-2"></i>Apply Now</a></li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <h2 class="section-title" data-aos="fade-right">Admission Form</h2>
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <form class="border p-4 rounded shadow-sm">
-            <div class="mb-3"><label>Full Name</label><input class="form-control" placeholder="Your name"></div>
-            <div class="mb-3"><label>Select Class</label><select class="form-select"><option>9th Class</option><option>10th Class</option><option>FSc Pre-Medical</option><option>FSc Pre-Engineering</option></select></div>
-            <div class="row"><div class="col-md-6 mb-3"><label>Phone</label><input class="form-control" placeholder="03xx..."></div><div class="col-md-6 mb-3"><label>Email</label><input class="form-control" placeholder="email@example.com"></div></div>
-            <div class="mb-3"><label>Message (optional)</label><textarea class="form-control" rows="3"></textarea></div>
-            <button class="btn btn-gold w-100">Submit Application</button>
-          </form>
-        </div>
+  <!-- Modal (copy from index.html) -->
+  <div class="modal fade" id="applyModal" tabindex="-1">...</div>
+
+  <!-- Page Hero -->
+  <section class="page-hero text-white">
+    <div class="container text-center">
+      <h1 class="display-3 fw-bold mb-3">Admissions Open 2025</h1>
+      <p class="lead fs-3">9th · 10th · FSc (Pre-Medical / Pre-Engineering)</p>
+      <div class="mt-4">
+        <span class="badge bg-gold text-navy px-4 py-2 me-2">Limited Seats</span>
+        <span class="badge bg-white text-navy px-4 py-2">Apply by March 31</span>
       </div>
     </div>
   </section>
 
-  <footer class="footer pt-5 pb-4">...</footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script>AOS.init()</script>
-</body>
-</html>
+  <!-- Fee Structure -->
+  <section class="py-5">
+    <div class="container py-4">
+      <h2 class="section-title" data-aos="fade-right">Fee Structure 2025</h2>
+      <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card card-hover p-4 text-center border-0 shadow-sm">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+              <i class="bi bi-book fs-1 text-navy"></i>
+            </div>
+            <h3 class="text-gold fw-bold">9th Class</h3>
+            <p class="display-6 fw-bold text-navy mb-3">Rs. 25,000</p>
+            <p class="text-secondary">per semester</p>
+            <hr>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Complete notes & worksheets</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Weekly test series</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Past papers practice</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="50">
+          <div class="card card-hover p-4 text-center border-0 shadow-sm">
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+              <i class="bi bi-journal-bookmark-fill fs-1 text-navy"></i>
+            </div>
+            <h3 class="text-gold fw-bold">10th Class</h3>
+            <p class="display-6 fw-bold text-navy mb-3">Rs. 26,000</p>
+            <p class="text-secondary">per semester</p>
+            <hr>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Board pattern practicals</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Full syllabus coverage</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Model paper practice</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card card-hover p-4 text-center border-0 shadow-sm position-relative overflow-hidden">
+            <div class="position-absolute top-0 end-0 bg-gold text-navy px-4 py-1 rounded-bl-3" style="border-bottom-left-radius: 20px;">Popular</div>
+            <div class="bg-gold rounded-circle d-inline-flex p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+              <i class="bi bi-flask fs-1 text-navy"></i>
+            </div>
+            <h3 class="text-gold fw-bold">FSc</h3>
+            <p class="display-6 fw-bold text-navy mb-3">Rs. 30,000</p>
+            <p class="text-secondary">per semester</p>
+            <hr>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Pre-Medical / Pre-Engineering</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Entry test preparation</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-gold me-2"></i>Lab facilities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-<!-- ================================================== -->
-<!-- FILE: cadet.html (CADET COLLEGES)                  -->
-<!-- ================================================== -->
-<!DOCTYPE html>
-<html lang="en">
-<head>... (similar meta, style) <title>Cadet College Prep | Inspire Academy</title> ...</head>
-<body> (navbar same, active "Cadet Colleges")
-  <section class="page-hero text-white"><div class="container"><h1>Cadet College Entry Preparation</h1><p>MCM · MCJ · PAF Kohat</p></div></section>
-  <section class="py-5"><div class="container">
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="fade-up"><div class="card card-hover"><img src="https://via.placeholder.com/400x200/0a2b5e/ffffff?text=MCM" class="card-img-top"><div class="card-body"><h4>MCM</h4><p>Military College Murree – written, intelligence, interview.</p></div></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="50"><div class="card card-hover"><img src="https://via.placeholder.com/400x200/0a2b5e/ffffff?text=MCJ" class="card-img-top"><div class="card-body"><h4>MCJ</h4><p>Military College Jhelum – complete past paper guidance.</p></div></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="card card-hover"><img src="https://via.placeholder.com/400x200/0a2b5e/ffffff?text=PAF+Kohat" class="card-img-top"><div class="card-body"><h4>PAF Kohat</h4><p>Physical & written test preparation with ex-Army mentor.</p></div></div></div>
-    </div>
-    <hr class="my-5">
-    <h2 class="section-title">Preparation details</h2>
-    <ul><li>Weekly mock tests (written & intelligence)</li><li>Physical fitness sessions (guided by Sir Shafqat)</li><li>Past papers of last 10 years</li><li>Interview技巧 training</li></ul>
-  </div></section>
-  <footer>...</footer>
-</body></html>
-
-<!-- ================================================== -->
-<!-- FILE: visa.html (STUDY VISA)                        -->
-<!-- ================================================== -->
-<!DOCTYPE html>
-<html lang="en">
-<head><title>Study Visa Consultation | Inspire Academy</title> ... </head>
-<body> (navbar active "Study Visa")
-  <section class="page-hero text-white"><div class="container"><h1>Study Visa Consultation</h1><p>UK · Australia · Canada · Turkey</p></div></section>
-  <section class="py-5"><div class="container">
-    <h2 class="section-title">Countries we offer</h2><div class="row"> <div class="col-3">🇬🇧 UK</div> <div class="col-3">🇨🇦 Canada</div> <div class="col-3">🇦🇺 Australia</div> <div class="col-3">🇹🇷 Turkey</div> </div>
-    <h2 class="section-title mt-5">Our Services</h2><div class="row g-4">
-      <div class="col-md-3"><div class="card card-hover p-3"><i class="bi bi-building fs-1 text-gold"></i><h6>Uni Admission Guidance</h6></div></div>
-      <div class="col-md-3"><div class="card card-hover p-3"><i class="bi bi-file-earmark-text fs-1 text-gold"></i><h6>Visa File Preparation</h6></div></div>
-      <div class="col-md-3"><div class="card card-hover p-3"><i class="bi bi-chat-dots fs-1 text-gold"></i><h6>Interview Preparation</h6></div></div>
-      <div class="col-md-3"><div class="card card-hover p-3"><i class="bi bi-award fs-1 text-gold"></i><h6>Scholarship Guidance</h6></div></div>
-    </div>
-    <h2 class="section-title mt-5">Process steps</h2>
-    <ol class="list-group list-group-numbered"><li>Free consultation</li><li>Document check</li><li>University application</li><li>Visa lodging</li><li>Pre-departure briefing</li></ol>
-    <h2 class="section-title mt-5">Book a consultation</h2>
-    <form class="border p-4"><div class="mb-3"><input class="form-control" placeholder="Name"></div><div class="mb-3"><input class="form-control" placeholder="Email"></div><div class="mb-3"><input class="form-control" placeholder="Country of interest"></div><button class="btn btn-gold">Book now</button></form>
-  </div></section>
-  <footer>...</footer>
-</body></html>
-
-<!-- ================================================== -->
-<!-- FILE: teachers.html (TEACHERS INTRODUCTION)        -->
-<!-- ================================================== -->
-<!DOCTYPE html>
-<html lang="en">
-<head><title>Our Teachers | Inspire Academy</title> ...</head>
-<body> (navbar active "Teachers")
-  <section class="page-hero text-white"><div class="container"><h1>Our Expert Mentors</h1></div></section>
-  <section class="py-5"><div class="container">
-    <div class="row g-5">
-      <div class="col-md-6" data-aos="fade-right"><div class="card card-hover"><img src="Shafqat.jpg" class="card-img-top" alt="Sir Shafqat"><div class="card-body"><h3>Sir Shafqat Abbas <span class="badge bg-gold">Ex Army MA Med</span></h3><p class="mt-2"><i class="bi bi-award-fill text-gold"></i> 22 years in armed forces education.<br> Specializes in cadet college entry tests, personality development, and general knowledge. Trained hundreds of successful candidates for MCM, MCJ, PAF.</p><div class="fs-3"><a href="#" class="text-gold me-2"><i class="bi bi-facebook"></i></a><a href="#" class="text-gold me-2"><i class="bi bi-linkedin"></i></a></div></div></div></div>
-      <div class="col-md-6" data-aos="fade-left"><div class="card card-hover"><img src="Akbar.png" class="card-img-top" alt="Sir Ghulam"><div class="card-body"><h3>Sir Ghulam Akbar <span class="badge bg-gold">MSc Zoology, Pharmacist</span></h3><p class="mt-2"><i class="bi bi-award-fill text-gold"></i> Gold medalist in MSc Zoology, qualified pharmacist. 15+ years teaching FSc and entry tests. Expert in Biology, Chemistry, and study visa counselling.</p><div class="fs-3"><a href="#" class="text-gold me-2"><i class="bi bi-facebook"></i></a><a href="#" class="text-gold me-2"><i class="bi bi-linkedin"></i></a></div></div></div></div>
-    </div>
-    <div class="row mt-5"><div class="col-12"><h2 class="section-title">Short biography</h2><p>Sir Shafqat Abbas retired as Army MA Med, later dedicated to teaching. Sir Ghulam Akbar combines pharmacy with education. Together they ensure holistic growth.</p></div></div>
-  </div></section>
-  <footer>...</footer>
-</body></html>
-<!-- ========== END OF ALL PAGES ========== -->
+      <!-- Admission Form -->
+      <h2 class="section-title mt-5" data-aos="fade-right">Online Admission Form</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-lg p-4" data-aos="fade-up">
+            <form>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Full Name *</label>
+                  <input type="text" class="form-control" placeholder="As per CNIC/B-Form" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Father's Name *</label>
+                  <input type="text" class="form-control" placeholder="Father's full name" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Select Program *</label>
+                <select class="form-select" required>
+                  <option value="">Choose program</option>
+                  <option>9th Class</option>
+                  <option>10th Class</option>
+                  <option>FSc Pre-Medical</option>
+                  <option>FSc Pre-Engineering</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Email *</label
